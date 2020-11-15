@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import Navbar from "@/components/shared/Navbar";
-import DashboardCard from "@/components/shared/dashboard/DashboardCard";
+import DashboardCard from "@/components/dashboard/DashboardCard";
+import OrderCard from "@/components/dashboard/OrderCard";
 
 interface DashboardCardData {
   title: string;
@@ -48,8 +49,8 @@ const IndexPage = () => {
           What are you going to do?
         </div>
       </div>
-      <div className="container mx-auto p-6">
-        <div className="flex flex-wrap -m-2">
+      <div className="p-6">
+        {/* <div className="flex flex-wrap -m-2">
           {dashboardItems.map((data) => {
             return (
               <div className="w-full md:w-1/2 lg:w-1/3 p-2">
@@ -61,7 +62,8 @@ const IndexPage = () => {
               </div>
             );
           })}
-        </div>
+        </div> */}
+        <OrderCard />
       </div>
     </div>
   );
