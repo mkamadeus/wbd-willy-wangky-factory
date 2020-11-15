@@ -36,7 +36,7 @@ const IndexPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="p-6">
         <div className="text-4xl font-bold relative">
           Welcome, mkamadeus!
@@ -49,21 +49,19 @@ const IndexPage = () => {
           What are you going to do?
         </div>
       </div>
-      <div className="p-6">
-        {/* <div className="flex flex-wrap -m-2">
-          {dashboardItems.map((data) => {
-            return (
-              <div className="w-full md:w-1/2 lg:w-1/3 p-2">
-                <DashboardCard
-                  title={data.title}
-                  description={data.description}
-                  color={data.color}
-                />
-              </div>
-            );
-          })}
-        </div> */}
-        <OrderCard />
+      <div className="grid grid-rows-2 grid-flow-col gap-4">
+        <div className="p-2">
+          <OrderCard />
+        </div>
+        <div className="p-2">
+          <OrderCard />
+        </div>
+        <div className="p-2">
+          <OrderCard />
+        </div>
+        <div className="p-2">
+          <OrderCard />
+        </div>
       </div>
     </div>
   );

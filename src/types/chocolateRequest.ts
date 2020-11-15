@@ -2,12 +2,12 @@
  * @Author: mkamadeus
  * @Date: 2020-11-13 10:04:59
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-13 10:38:17
+ * @Last Modified time: 2020-11-16 00:14:40
  */
 
 import { Chocolate } from "./chocolate";
 
-// stock_request(id, chocolateId, amountPending, amountDelivered, status, createdAt, updatedAt)
+// stock_request(id, chocolateId, amount, status, createdAt, updatedAt)
 
 export enum ChocolateRequestStatus {
   PENDING,
@@ -17,8 +17,7 @@ export enum ChocolateRequestStatus {
 export interface ChocolateRequest {
   id: number;
   chocolate: Partial<Chocolate>;
-  amountPending: number;
-  amountDelivered: number;
+  amount: number;
   status: ChocolateRequestStatus;
   createdAt: Date;
   updatedAt: Date;

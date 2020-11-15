@@ -2,7 +2,7 @@
  * @Author: mkamadeus
  * @Date: 2020-11-13 11:57:57
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-13 12:03:35
+ * @Last Modified time: 2020-11-16 00:12:29
  */
 
 import {
@@ -19,8 +19,7 @@ export const getChocolateRequests = async (): Promise<ChocolateRequest[]> => {
         id: 1,
         name: "Pisang",
       },
-      amountDelivered: 30,
-      amountPending: 3,
+      amount: 30,
       status: ChocolateRequestStatus.PENDING,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -31,8 +30,7 @@ export const getChocolateRequests = async (): Promise<ChocolateRequest[]> => {
         id: 1,
         name: "Pisang",
       },
-      amountDelivered: 30,
-      amountPending: 3,
+      amount: 30,
       status: ChocolateRequestStatus.PENDING,
       createdAt: new Date(),
       updatedAt: new Date(),
