@@ -1,14 +1,41 @@
-import React from "react";
+import { UserContext } from "@/context/UserContext";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
+  const userContext = useContext(UserContext);
+  const history = useHistory();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    history.push("/login");
+  };
+
   return (
-    <nav className="flex justify-between shadow-lg p-4 w-screen">
-      <div>Logo</div>
-      <div className="flex flex-col">
-        <div>mkamadeus</div>
-        <div>Logout</div>
+    <div className="flex justify-between p-6">
+      <div>
+        <div className="text-4xl font-bold relative">
+          Welcome, {userContext.username}!
+          <div
+            className="absolute bottom-0 bg-gradient-to-r from-teal-400 to-blue-500"
+            style={{ width: 200, height: 6, left: 50 }}
+          />
+        </div>
+        <div className="mt-2 italic text-gray-600">
+          What are you going to do?
+        </div>
       </div>
-    </nav>
+      <div>
+        <button
+          className="text-blue-500 underline"
+          onClick={() => {
+            logout();
+          }}
+        >
+          Logout
+        </button>
+      </div>
+    </div>
   );
 };
 

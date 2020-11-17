@@ -28,7 +28,7 @@ const LoginPage = () => {
     localStorage.setItem("token", "abc");
     apiContext.setToken("abc");
     userContext.setLoggedIn(true);
-    userContext.setUsername("mkamadeus");
+    userContext.setUsername(data.username);
 
     // FIXME : If verified, navigate
     if (true) {
