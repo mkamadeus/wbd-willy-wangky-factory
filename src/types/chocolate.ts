@@ -5,8 +5,11 @@
  * @Last Modified time: 2020-11-13 11:58:29
  */
 
-export interface Chocolate {
+export interface ChocolateBase {
   id: number;
   name: string;
+}
+
+export interface Chocolate extends ChocolateBase {
   stock: number;
 }

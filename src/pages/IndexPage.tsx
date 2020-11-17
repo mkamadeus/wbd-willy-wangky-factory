@@ -1,8 +1,9 @@
-import React, { useMemo } from "react";
+import React from "react";
 import Navbar from "@/components/shared/Navbar";
 import PurchaseCard from "@/components/dashboard/PurchaseCard";
 import OrderCard from "@/components/dashboard/OrderCard";
 import IngredientCard from "@/components/dashboard/IngredientCard";
+import RecipeCard from "@/components/dashboard/RecipeCard";
 
 interface DashboardCardData {
   title: string;
@@ -14,7 +15,7 @@ interface DashboardCardData {
 const IndexPage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="h-32 p-6">
         <div className="text-4xl font-bold relative">
           Welcome, mkamadeus!
@@ -39,7 +40,7 @@ const IndexPage = () => {
             <IngredientCard />
           </div>
           <div className="p-2 col-span-1 row-span-2">
-            <OrderCard />
+            <RecipeCard />
           </div>
         </div>
       </div>

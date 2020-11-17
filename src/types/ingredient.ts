@@ -17,6 +17,11 @@ export interface IngredientMeta {
 
 export interface Ingredient extends IngredientBase, IngredientMeta {}
 
+export interface IngredientRecipe extends IngredientBase {
+  amount: number;
+  unit: string;
+}
+
 export interface IngredientAllExpiry extends IngredientBase {
   list: Array<IngredientMeta>;
 }
