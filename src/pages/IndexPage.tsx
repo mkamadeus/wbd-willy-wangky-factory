@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Navbar from "@/components/shared/Navbar";
 import PurchaseCard from "@/components/dashboard/PurchaseCard";
 import OrderCard from "@/components/dashboard/OrderCard";
 import IngredientCard from "@/components/dashboard/IngredientCard";
 import RecipeCard from "@/components/dashboard/RecipeCard";
+import { ApiContext } from "@/context/ApiContext";
+import { useHistory } from "react-router-dom";
+import { UserContext } from "@/context/UserContext";
 
 interface DashboardCardData {
   title: string;
@@ -13,6 +16,17 @@ interface DashboardCardData {
 }
 
 const IndexPage = () => {
+  const apiContext = useContext(ApiContext);
+  const userContext = useContext(UserContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log(apiContext.token, userContext.isLoggedIn);
+    if (!apiContext.token && !userContext.isLoggedIn) {
+      history.push("/login");
+    }
+  }, [apiContext]);
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <Navbar />

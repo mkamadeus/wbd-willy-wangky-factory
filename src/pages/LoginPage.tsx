@@ -5,7 +5,9 @@
  * @Last Modified time: 2020-11-13 19:46:15
  */
 
-import React from "react";
+import { ApiContext } from "@/context/ApiContext";
+import { UserContext } from "@/context/UserContext";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 
@@ -15,10 +17,18 @@ type LoginForm = {
 };
 const LoginPage = () => {
   const { register, handleSubmit } = useForm<LoginForm>();
+  const apiContext = useContext(ApiContext);
+  const userContext = useContext(UserContext);
   const history = useHistory();
 
-  const onSubmit = () => {
+  const onSubmit = (data: LoginForm) => {
     // TODO : Verify
+    console.log(data);
+
+    localStorage.setItem("token", "abc");
+    apiContext.setToken("abc");
+    userContext.setLoggedIn(true);
+    userContext.setUsername("mkamadeus");
 
     // FIXME : If verified, navigate
     if (true) {
