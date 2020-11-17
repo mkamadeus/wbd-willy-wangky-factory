@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import Navbar from "@/components/shared/Navbar";
-import DashboardCard from "@/components/dashboard/DashboardCard";
+import PurchaseCard from "@/components/dashboard/PurchaseCard";
 import OrderCard from "@/components/dashboard/OrderCard";
+import IngredientCard from "@/components/dashboard/IngredientCard";
 
 interface DashboardCardData {
   title: string;
@@ -11,33 +12,10 @@ interface DashboardCardData {
 }
 
 const IndexPage = () => {
-  const dashboardItems: DashboardCardData[] = [
-    {
-      title: "Orders",
-      description: "Check orders and approve them.",
-      color: "bg-pink-200",
-    },
-    {
-      title: "Ingredients",
-      description: "Check your ingredients and their prices.",
-      color: "bg-purple-200",
-    },
-    {
-      title: "Chocolates",
-      description: "Check available chocolates and their recipes.",
-      color: "bg-blue-200",
-    },
-    {
-      title: "Purchase",
-      description: "Purchase ingredients from supplier.",
-      color: "bg-orange-200",
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       {/* <Navbar /> */}
-      <div className="p-6">
+      <div className="h-32 p-6">
         <div className="text-4xl font-bold relative">
           Welcome, mkamadeus!
           <div
@@ -49,18 +27,20 @@ const IndexPage = () => {
           What are you going to do?
         </div>
       </div>
-      <div className="grid grid-rows-2 grid-flow-col gap-4">
-        <div className="p-2">
-          <OrderCard />
-        </div>
-        <div className="p-2">
-          <OrderCard />
-        </div>
-        <div className="p-2">
-          <OrderCard />
-        </div>
-        <div className="p-2">
-          <OrderCard />
+      <div className="flex-1 p-2">
+        <div className="grid grid-rows-4 grid-flow-col gap-2 w-full">
+          <div className="p-2 col-span-2 row-span-3">
+            <OrderCard />
+          </div>
+          <div className="p-2 col-span-2 row-span-1">
+            <PurchaseCard />
+          </div>
+          <div className="p-2 col-span-1 row-span-2">
+            <IngredientCard />
+          </div>
+          <div className="p-2 col-span-1 row-span-2">
+            <OrderCard />
+          </div>
         </div>
       </div>
     </div>

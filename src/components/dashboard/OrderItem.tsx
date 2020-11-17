@@ -19,7 +19,7 @@ const Lazy: React.FC = () => {
         .fill(1)
         .map(() => {
           return (
-            <td className="p-1 text-center text-sm border">
+            <td className="text-center text-sm">
               <LazyText />
             </td>
           );
@@ -31,29 +31,29 @@ const Lazy: React.FC = () => {
 const OrderItem: React.FC<Props> & { Lazy: React.FC } = (props: Props) => {
   return (
     <tr>
-      <td className="p-1 text-center text-sm border">#{props.id}</td>
-      <td className="p-1 text-center text-sm border">{props.chocolate.name}</td>
-      <td className="p-1 text-center text-sm border">
-        <div
-          className={`rounded-full p-1 px-2 text-white text-sm ${
-            props.status === ChocolateRequestStatus.DELIVERED
-              ? "bg-green-500"
-              : "bg-red-500"
-          }`}
-        >
-          {props.status === ChocolateRequestStatus.DELIVERED
-            ? "Delivered"
-            : "Pending"}
+      <td className="text-center text-sm">#{props.id}</td>
+      <td className="text-center text-sm">{props.chocolate.name}</td>
+      <td className="text-center text-sm">
+        <div className="flex justify-center items-center w-full h-full">
+          <div
+            className={`rounded-full px-2 text-white text-xs ${
+              props.status === ChocolateRequestStatus.DELIVERED
+                ? "bg-green-500"
+                : "bg-red-500"
+            }`}
+          >
+            {props.status === ChocolateRequestStatus.DELIVERED
+              ? "Delivered"
+              : "Pending"}
+          </div>
         </div>
       </td>
-      <td className="p-1 text-center text-sm border">
-        {props.createdAt.toDateString()}
-      </td>
-      <td className="p-1 text-center text-sm border">{props.amount}</td>
-      <td className="p-1 text-center text-sm border">
+      <td className="text-center text-sm">{props.createdAt.toDateString()}</td>
+      <td className="text-center text-sm">{props.amount}</td>
+      <td className="text-center text-sm">
         <button
           type="submit"
-          className="w-full border border-green-600 text-green-600 rounded-full p-1 focus:outline-none transition duration-150"
+          className="w-full text-xs text-green-600 underline rounded-full focus:outline-none transition duration-150"
         >
           Process
         </button>
