@@ -1,9 +1,7 @@
-import { getChocolateRequests } from "@/api/chocolateRequest";
 import { getIngredients } from "@/api/ingredient";
 import React from "react";
 import { useQuery } from "react-query";
 import IngredientItem from "./IngredientItem";
-import OrderItem from "./OrderItem";
 
 interface Props {}
 
