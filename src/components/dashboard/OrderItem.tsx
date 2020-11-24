@@ -1,11 +1,13 @@
+import { approveChocolateRequest } from "@/api/chocolateRequest";
 import { Chocolate } from "@/types/chocolate";
 import { ChocolateRequestStatus } from "@/types/chocolateRequest";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
 import LazyText from "../shared/LazyText";
 
 interface Props {
   id: number;
+  uuid?: string | undefined;
   status: ChocolateRequestStatus;
   createdAt: Date;
   chocolate: Partial<Chocolate>;
@@ -29,6 +31,16 @@ const Lazy: React.FC = () => {
 };
 
 const OrderItem: React.FC<Props> & { Lazy: React.FC } = (props: Props) => {
+  const [mutate] = useMutation(approveChocolateRequest);
+
+  const approveRequest = () => {
+    try {
+      mutate({ uuid: props.uuid as string });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <tr>
       <td className="text-center text-sm">#{props.id}</td>
@@ -52,8 +64,15 @@ const OrderItem: React.FC<Props> & { Lazy: React.FC } = (props: Props) => {
       <td className="text-center text-sm">{props.amount}</td>
       <td className="text-center text-sm">
         <button
-          type="submit"
-          className="w-full text-xs text-green-600 underline rounded-full focus:outline-none transition duration-150"
+          className={`w-full text-xs ${
+            props.status === ChocolateRequestStatus.PENDING
+              ? "text-green-600"
+              : "text-gray-600 cursor-not-allowed"
+          } underline rounded-full focus:outline-none transition duration-150`}
+          onClick={() => {
+            approveRequest();
+          }}
+          disabled={props.status !== ChocolateRequestStatus.PENDING}
         >
           Process
         </button>

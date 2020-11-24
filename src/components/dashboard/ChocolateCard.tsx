@@ -5,18 +5,18 @@ import IngredientItem from "./IngredientItem";
 
 interface Props {}
 
-const IngredientCard: React.FC<Props> = (props) => {
-  const { data: ingredients, isLoading } = useQuery(
-    "ingredients",
-    getIngredients
-  );
+const ChocolateCard: React.FC<Props> = (props) => {
+  // const { data: ingredients, isLoading } = useQuery(
+  //   "ingredients",
+  //   getIngredients
+  // );
 
   return (
     <div className="flex flex-col rounded bg-white p-4 shadow">
       <div className="mb-2">
         <div className="text-3xl font-bold">Ingredients</div>
       </div>
-      {!isLoading && ingredients
+      {/* {!isLoading && ingredients
         ? ingredients.map((ingredient) => {
             return (
               <IngredientItem
@@ -30,9 +30,9 @@ const IngredientCard: React.FC<Props> = (props) => {
             .fill(1)
             .map(() => {
               return <IngredientItem.Lazy />;
-            })}
+            })} */}
     </div>
   );
 };
 
-export default IngredientCard;
+export default ChocolateCard;

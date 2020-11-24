@@ -5,8 +5,10 @@
  * @Last Modified time: 2020-11-13 19:46:15
  */
 
+import { login } from "@/api/auth";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
 
 type LoginForm = {
@@ -15,15 +17,22 @@ type LoginForm = {
 };
 const LoginPage = () => {
   const { register, handleSubmit } = useForm<LoginForm>();
+  const [mutate] = useMutation(login);
   const history = useHistory();
 
-  const onSubmit = () => {
+  const onSubmit = async (credentials: LoginForm) => {
     // TODO : Verify
-
-    // FIXME : If verified, navigate
-    if (true) {
-      history.push("/");
-    }
+    await mutate(credentials)
+      .then((status) => {
+        // FIXME : If verified, navigate
+        status = status as boolean;
+        if (status) {
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

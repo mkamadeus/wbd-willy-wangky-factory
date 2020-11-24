@@ -5,7 +5,7 @@
  * @Last Modified time: 2020-11-16 17:29:31
  */
 
-import { Ingredient, IngredientAllExpiry } from "@/types/ingredient";
+import { IngredientAllExpiry } from "@/types/ingredient";
 import { generateDummyPromise } from "./dummy";
 
 export const getIngredients = async () => {

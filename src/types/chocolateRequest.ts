@@ -16,6 +16,7 @@ export enum ChocolateRequestStatus {
 
 export interface ChocolateRequest {
   id: number;
+  uuid?: string | undefined;
   chocolate: Partial<Chocolate>;
   amount: number;
   status: ChocolateRequestStatus;
