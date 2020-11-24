@@ -6,7 +6,9 @@
  */
 
 import { login } from "@/api/auth";
-import React from "react";
+import { ApiContext } from "@/context/ApiContext";
+import { UserContext } from "@/context/UserContext";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
@@ -17,6 +19,9 @@ type LoginForm = {
 };
 const LoginPage = () => {
   const { register, handleSubmit } = useForm<LoginForm>();
+  // const apiContext = useContext(ApiContext);
+  const userContext = useContext(UserContext);
+  // const history = useHistory();
   const [mutate] = useMutation(login);
   const history = useHistory();
 
@@ -27,6 +32,9 @@ const LoginPage = () => {
         // FIXME : If verified, navigate
         status = status as boolean;
         if (status) {
+          userContext.setLoggedIn(status);
+          userContext.setUsername(credentials.username);
+
           history.push("/");
         }
       })
@@ -34,7 +42,6 @@ const LoginPage = () => {
         console.log(err);
       });
   };
-
   return (
     <div className="bg-gradient-to-r from-teal-400 to-blue-500">
       <div className="container mx-auto flex justify-center items-center h-screen">

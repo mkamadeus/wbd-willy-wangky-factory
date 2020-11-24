@@ -5,10 +5,10 @@
  * @Last Modified time: 2020-11-16 16:24:33
  */
 
-import { Chocolate } from "./chocolate";
-import { Ingredient } from "./ingredient";
+import { ChocolateBase } from "./chocolate";
+import { IngredientRecipe } from "./ingredient";
 
-export interface ChocolateRecipe {
-  chocolate: Chocolate;
-  ingredients: Array<Ingredient>;
+export interface Recipe {
+  chocolate: ChocolateBase;
+  ingredients: Array<IngredientRecipe>;
 }
