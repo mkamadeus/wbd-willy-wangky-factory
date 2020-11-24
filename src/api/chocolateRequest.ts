@@ -32,9 +32,6 @@ export const getChocolateRequests = async (): Promise<ChocolateRequest[]> => {
       const chocolateRequests =
         result["S:Envelope"]["S:Body"][0]["ns2:getAllStockRequestsResponse"][0]
           .return[0].item;
-
-      console.log(chocolateRequests);
-
       const chocolateRequestArray: ChocolateRequest[] = [];
 
       for (let i = 0; i < chocolateRequests.length; i++) {

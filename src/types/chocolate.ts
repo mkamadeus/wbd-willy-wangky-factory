@@ -12,4 +12,5 @@ export interface ChocolateBase {
 
 export interface Chocolate extends ChocolateBase {
   stock: number;
+  uuid?: string | undefined;
 }

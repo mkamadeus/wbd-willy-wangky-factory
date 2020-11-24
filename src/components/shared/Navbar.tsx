@@ -7,15 +7,15 @@ const Navbar = () => {
   const history = useHistory();
 
   const logout = () => {
-    localStorage.removeItem("token");
-    history.push("/login");
+    // localStorage.removeItem("token");
+    // history.push("/login");
   };
 
   return (
-    <div className="flex justify-between p-6">
+    <div className="flex justify-between items-center p-6">
       <div>
         <div className="text-4xl font-bold relative">
-          Welcome, {userContext.username}!
+          Welcome, mkamadeus!
           <div
             className="absolute bottom-0 bg-gradient-to-r from-teal-400 to-blue-500"
             style={{ width: 200, height: 6, left: 50 }}
@@ -27,7 +27,7 @@ const Navbar = () => {
       </div>
       <div>
         <button
-          className="text-blue-500 underline"
+          className="p-2 rounded bg-blue-500 hover:bg-blue-600 text-white"
           onClick={() => {
             logout();
           }}
