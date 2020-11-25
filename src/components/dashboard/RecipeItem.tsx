@@ -46,10 +46,10 @@ const RecipeItem: React.FC<Props> & { Lazy: React.FC } = (props) => {
           {props.ingredients &&
             props.ingredients.map((ing) => {
               return (
-                <div className="flex justify-between">
+                <div className="flex">
                   <div className="italic text-xs text-gray-700">{ing.name}</div>
                   <div className="italic text-xs text-gray-700">
-                    {ing.amount} {ing.unit}
+                    {ing.amount}
                   </div>
                 </div>
               );

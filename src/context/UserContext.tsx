@@ -1,5 +1,4 @@
-import { stringify } from "querystring";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export type UserContextType = {
   username: string;
@@ -18,6 +17,10 @@ export const UserContext = React.createContext<UserContextType>({
 const UserContextProvider: React.FC = (props) => {
   const [username, setUsername] = useState<string>("");
   const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+
+  // useEffect(() => {
+
+  // }, [])
 
   return (
     <UserContext.Provider

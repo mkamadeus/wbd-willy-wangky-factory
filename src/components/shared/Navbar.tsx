@@ -1,14 +1,22 @@
+import { logout } from "@/api/auth";
 import { UserContext } from "@/context/UserContext";
 import React, { useContext } from "react";
+import { useMutation, useQuery } from "react-query";
 import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
   const userContext = useContext(UserContext);
   const history = useHistory();
 
-  const logout = () => {
-    // localStorage.removeItem("token");
-    // history.push("/login");
+  const [mutate] = useMutation(logout);
+
+  const doLogout = () => {
+    try {
+      mutate();
+      history.push("/login");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -29,7 +37,7 @@ const Navbar = () => {
         <button
           className="p-2 rounded bg-blue-500 hover:bg-blue-600 text-white"
           onClick={() => {
-            logout();
+            doLogout();
           }}
         >
           Logout

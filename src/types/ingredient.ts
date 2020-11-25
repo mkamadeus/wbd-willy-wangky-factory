@@ -2,7 +2,7 @@
  * @Author: mkamadeus
  * @Date: 2020-11-13 10:05:08
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-16 19:41:39
+ * @Last Modified time: 2020-11-25 11:12:18
  */
 
 export interface IngredientBase {
@@ -18,8 +18,9 @@ export interface IngredientMeta {
 export interface Ingredient extends IngredientBase, IngredientMeta {}
 
 export interface IngredientRecipe extends IngredientBase {
+  stock: number;
   amount: number;
-  unit: string;
+  uuid?: string | undefined;
 }
 
 export interface IngredientAllExpiry extends IngredientBase {

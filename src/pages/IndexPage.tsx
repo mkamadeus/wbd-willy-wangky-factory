@@ -1,4 +1,10 @@
-import React, { ReactNode, useContext, useMemo, useState } from "react";
+import React, {
+  ReactNode,
+  useContext,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
 import PurchaseCard from "@/components/dashboard/PurchaseCard";
 import OrderCard from "@/components/dashboard/OrderCard";
 import IngredientCard from "@/components/dashboard/IngredientCard";
@@ -22,11 +28,12 @@ const IndexPage = () => {
   const history = useHistory();
 
   // useEffect(() => {
-  //   console.log(apiContext.token, userContext.isLoggedIn);
-  //   if (!userContext.isLoggedIn) {
-  //     history.push("/login");
-  //   }
-  // }, [apiContext]);
+  //   // Cookie;
+  //   // console.log(apiContext.token, userContext.isLoggedIn);
+  //   // if (!userContext.isLoggedIn) {
+  //   //   history.push("/login");
+  //   // }
+  // }, []);
 
   const [cardIndex, setCardIndex] = useState<number>(0);
 
