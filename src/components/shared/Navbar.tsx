@@ -1,11 +1,9 @@
 import { logout } from "@/api/auth";
-import { UserContext } from "@/context/UserContext";
 import React, { useContext } from "react";
 import { useMutation, useQuery } from "react-query";
 import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
-  const userContext = useContext(UserContext);
   const history = useHistory();
 
   const [mutate] = useMutation(logout);

@@ -22,7 +22,6 @@ const IngredientCard: React.FC<Props> = (props) => {
               <IngredientItem
                 ingredientId={ingredient.id}
                 name={ingredient.name}
-                list={ingredient.list}
               />
             );
           })

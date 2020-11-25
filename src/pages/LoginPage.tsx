@@ -2,41 +2,31 @@
  * @Author: mkamadeus
  * @Date: 2020-11-13 14:02:14
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-13 19:46:15
+ * @Last Modified time: 2020-11-25 16:34:01
  */
 
+import React, { useContext, useEffect } from "react";
 import { login } from "@/api/auth";
-import { ApiContext } from "@/context/ApiContext";
-import { UserContext } from "@/context/UserContext";
-import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
+import useLogin from "@/hooks/useLogin";
 
 type LoginForm = {
   username: string;
   password: string;
 };
 const LoginPage = () => {
+  useLogin();
+
   const { register, handleSubmit } = useForm<LoginForm>();
-  // const apiContext = useContext(ApiContext);
-  const userContext = useContext(UserContext);
-  // const history = useHistory();
   const [mutate] = useMutation(login);
   const history = useHistory();
 
   const onSubmit = async (credentials: LoginForm) => {
-    // TODO : Verify
     await mutate(credentials)
       .then((status) => {
-        // FIXME : If verified, navigate
-        status = status as boolean;
-        if (status) {
-          userContext.setLoggedIn(status);
-          userContext.setUsername(credentials.username);
-
-          history.push("/");
-        }
+        history.push("/");
       })
       .catch((err) => {
         console.log(err);

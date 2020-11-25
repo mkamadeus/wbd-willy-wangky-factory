@@ -2,7 +2,7 @@
  * @Author: mkamadeus
  * @Date: 2020-11-13 11:57:57
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-16 00:12:29
+ * @Last Modified time: 2020-11-25 15:04:28
  */
 
 import {
@@ -11,19 +11,19 @@ import {
 } from "@/types/chocolateRequest";
 import axios from "axios";
 import { parseStringPromise } from "xml2js";
+import { factoryApi } from "./instance";
 
 export const getChocolateRequests = async (): Promise<ChocolateRequest[]> => {
-  return axios
+  return await factoryApi
     .post<string>(
-      `${process.env.REACT_APP_FACTORY_API_URL}/webapp/services/getAllStockRequests`,
+      "/getAllStockRequests",
       `<?xml version="1.0" ?>
       <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
           <S:Body>
               <ns2:getAllStockRequests xmlns:ns2="http://services/">
               </ns2:getAllStockRequests>
           </S:Body>
-      </S:Envelope>`,
-      { headers: { "content-type": "text/xml" }, withCredentials: true }
+      </S:Envelope>`
     )
     .then((response) => {
       return parseStringPromise(response.data);

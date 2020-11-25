@@ -1,4 +1,3 @@
-import { IngredientMeta } from "@/types/ingredient";
 import React, { useState } from "react";
 import LazyText from "../shared/LazyText";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,7 +6,6 @@ import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 interface Props {
   ingredientId?: number;
   name?: string;
-  list?: Array<IngredientMeta>;
 }
 
 const Lazy: React.FC = () => {
@@ -41,15 +39,12 @@ const IngredientItem: React.FC<Props> & { Lazy: React.FC } = (props) => {
         </div>
         <div className="text-sm">{props.name}</div>
       </div>
-      {show && (
+      {/* {show && (
         <div className="flex flex-col ml-4">
           {props.list &&
             props.list.map((meta) => {
               return (
                 <div className="flex justify-between">
-                  <div className="italic text-xs text-gray-700">
-                    {meta.expiryDate.toDateString()}
-                  </div>
                   <div className="italic text-xs text-gray-700">
                     {meta.stock}
                   </div>
@@ -57,7 +52,7 @@ const IngredientItem: React.FC<Props> & { Lazy: React.FC } = (props) => {
               );
             })}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

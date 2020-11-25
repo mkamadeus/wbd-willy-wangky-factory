@@ -3,11 +3,12 @@ import { Recipe } from "@/types/recipe";
 import axios from "axios";
 import { parseStringPromise } from "xml2js";
 import { Ingredient, IngredientRecipe } from "@/types/ingredient";
+import { factoryApi } from "./instance";
 
 export const getRecipes = async (): Promise<Recipe[]> => {
-  return await axios
+  return await factoryApi
     .post<string>(
-      `${process.env.REACT_APP_FACTORY_API_URL}/webapp/services/getAllRecipes`,
+      "/getAllRecipes",
       `<?xml version="1.0" ?>
   <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
       <S:Body>

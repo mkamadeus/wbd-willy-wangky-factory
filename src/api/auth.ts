@@ -1,5 +1,6 @@
 import axios from "axios";
 import { parseStringPromise } from "xml2js";
+import { factoryApi } from "./instance";
 
 export const login = async ({
   username,
@@ -8,9 +9,9 @@ export const login = async ({
   username: string;
   password: string;
 }) => {
-  return await axios
+  return await factoryApi
     .post<string>(
-      `${process.env.REACT_APP_FACTORY_API_URL}/webapp/services/login`,
+      "/login",
       `<?xml version="1.0" ?>
   <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
       <S:Body>
@@ -19,16 +20,17 @@ export const login = async ({
               <arg1>${password}</arg1>
           </ns2:login>
       </S:Body>
-  </S:Envelope>`,
-      { headers: { "content-type": "text/xml" }, withCredentials: true }
+  </S:Envelope>`
     )
     .then((response) => {
       console.log(response);
       return parseStringPromise(response.data);
     })
     .then((result) => {
-      return result["S:Envelope"]["S:Body"][0]["ns2:loginResponse"][0]
-        .return[0] as boolean;
+      return (
+        result["S:Envelope"]["S:Body"][0]["ns2:loginResponse"][0].return[0] ===
+        "true"
+      );
     })
     .catch((err) => {
       console.log(err);
@@ -36,24 +38,51 @@ export const login = async ({
 };
 
 export const logout = async () => {
-  return await axios
+  return await factoryApi
     .post<string>(
-      `${process.env.REACT_APP_FACTORY_API_URL}/webapp/services/logout`,
+      "/logout",
       `<?xml version="1.0" ?>
-      <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
-          <S:Body>
-              <ns2:logout xmlns:ns2="http://services/">
-              </ns2:logout>
-          </S:Body>
-      </S:Envelope>`,
-      { headers: { "content-type": "text/xml" }, withCredentials: true }
+  <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+      <S:Body>
+          <ns2:logout xmlns:ns2="http://services/">
+          </ns2:logout>
+      </S:Body>
+  </S:Envelope>`
     )
     .then((response) => {
       return parseStringPromise(response.data);
     })
     .then((result) => {
-      return result["S:Envelope"]["S:Body"][0]["ns2:loginResponse"][0]
-        .return[0] as boolean;
+      return (
+        result["S:Envelope"]["S:Body"][0]["ns2:loginResponse"][0].return[0] ===
+        "true"
+      );
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const checkSession = async () => {
+  return await factoryApi
+    .post<string>(
+      "/checkSession",
+      `<?xml version="1.0" ?>
+  <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+      <S:Body>
+          <ns2:checkSession xmlns:ns2="http://services/">
+          </ns2:checkSession>
+      </S:Body>
+  </S:Envelope>`
+    )
+    .then((response) => {
+      return parseStringPromise(response.data);
+    })
+    .then((result) => {
+      return (
+        result["S:Envelope"]["S:Body"][0]["ns2:checkSessionResponse"][0]
+          .return[0] === "true"
+      );
     })
     .catch((err) => {
       console.log(err);

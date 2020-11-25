@@ -2,26 +2,24 @@
  * @Author: mkamadeus
  * @Date: 2020-11-13 11:54:13
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-13 14:19:18
+ * @Last Modified time: 2020-11-25 15:04:31
  */
 
 import { Chocolate } from "@/types/chocolate";
-import axios from "axios";
 import { parseStringPromise } from "xml2js";
-import { generateDummyPromise } from "./dummy";
+import { factoryApi } from "./instance";
 
 export const getChocolates = async (): Promise<Chocolate[]> => {
-  return await axios
+  return await factoryApi
     .post<string>(
-      `${process.env.REACT_APP_FACTORY_API_URL}/webapp/services/getAllChocolates`,
+      "/getAllChocolates",
       `<?xml version="1.0" ?>
   <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
       <S:Body>
           <ns2:getAllChocolates xmlns:ns2="http://services/">
           </ns2:getAllChocolates>
       </S:Body>
-  </S:Envelope>`,
-      { headers: { "content-type": "text/xml" }, withCredentials: true }
+  </S:Envelope>`
     )
     .then((response) => {
       return parseStringPromise(response.data);
@@ -42,24 +40,4 @@ export const getChocolates = async (): Promise<Chocolate[]> => {
       }
       return chocolatesArray;
     });
-};
-
-export const getChocolateById = async (): Promise<Chocolate> => {
-  return await generateDummyPromise<Chocolate>({
-    id: 1,
-    name: "Cadbury",
-    stock: 3,
-  });
-};
-
-export const createChocolate = () => {
-  //
-};
-
-export const updateChocolate = () => {
-  //
-};
-
-export const deleteChocolate = () => {
-  //
 };
