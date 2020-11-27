@@ -3,6 +3,7 @@ import { Chocolate } from "@/types/chocolate";
 import { ChocolateRequestStatus } from "@/types/chocolateRequest";
 import React from "react";
 import { useMutation } from "react-query";
+import Swal from "sweetalert2";
 import LazyText from "../shared/LazyText";
 
 interface Props {
@@ -31,14 +32,24 @@ const Lazy: React.FC = () => {
 };
 
 const OrderItem: React.FC<Props> & { Lazy: React.FC } = (props: Props) => {
-  const [mutate] = useMutation(approveChocolateRequest);
+  const [mutate] = useMutation(approveChocolateRequest, { throwOnError: true });
 
   const approveRequest = () => {
-    try {
-      mutate({ uuid: props.uuid as string });
-    } catch (err) {
-      console.log(err);
-    }
+    mutate({ uuid: props.uuid as string })
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Item delivered!",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Approval error",
+          text: err.message,
+        });
+      });
   };
 
   return (

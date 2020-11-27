@@ -2,7 +2,7 @@
  * @Author: mkamadeus
  * @Date: 2020-11-13 11:57:57
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-25 15:04:28
+ * @Last Modified time: 2020-11-25 19:53:36
  */
 
 import {
@@ -84,6 +84,6 @@ export const approveChocolateRequest = async ({
       return;
     })
     .catch((err) => {
-      console.log(err.message);
+      throw new Error(err.message);
     });
 };

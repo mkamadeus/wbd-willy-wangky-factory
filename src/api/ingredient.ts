@@ -2,15 +2,16 @@
  * @Author: mkamadeus
  * @Date: 2020-11-16 13:39:09
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-25 15:05:01
+ * @Last Modified time: 2020-11-25 20:11:31
  */
 
+import { Ingredient } from "@/types/ingredient";
 import axios from "axios";
 import { parseStringPromise } from "xml2js";
 import { generateDummyPromise } from "./dummy";
-import { factoryApi } from "./instance";
+import { factoryApi, supplierApi } from "./instance";
 
-export const getIngredients = async () => {
+export const getFactoryIngredients = async () => {
   return await factoryApi
     .post<string>(
       "/getAvailableIngredients",
@@ -41,51 +42,12 @@ export const getIngredients = async () => {
       }
       return ingredientsArray;
     });
+};
 
-  // return await generateDummyPromise<IngredientAllExpiry[]>([
-  //   {
-  //     id: 1,
-  //     name: "Cinammon",
-  //     list: [
-  //       {
-  //         stock: 3,
-  //         expiryDate: new Date(),
-  //       },
-  //       {
-  //         stock: 5,
-  //         expiryDate: new Date(),
-  //       },
-  //       {
-  //         stock: 1000,
-  //         expiryDate: new Date(),
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Vanilla",
-  //     list: [
-  //       {
-  //         stock: 5,
-  //         expiryDate: new Date(),
-  //       },
-  //       {
-  //         stock: 1000,
-  //         expiryDate: new Date(),
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Banana Powder",
-  //     list: [
-  //       {
-  //         stock: 1000,
-  //         expiryDate: new Date(),
-  //       },
-  //     ],
-  //   },
-  // ]).then((ingredientsArray) => {
-  //   return ingredientsArray;
-  // });
+export const getSupplierIngredients = async () => {
+  return await supplierApi
+    .get<Ingredient[]>("/ingredient?show_price=1")
+    .then((response) => {
+      return response.data;
+    });
 };

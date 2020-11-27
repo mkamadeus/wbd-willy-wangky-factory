@@ -1,4 +1,3 @@
-import axios from "axios";
 import { parseStringPromise } from "xml2js";
 import { factoryApi } from "./instance";
 
@@ -33,7 +32,7 @@ export const login = async ({
       );
     })
     .catch((err) => {
-      console.log(err);
+      throw new Error(err.message);
     });
 };
 
@@ -59,7 +58,7 @@ export const logout = async () => {
       );
     })
     .catch((err) => {
-      console.log(err);
+      throw new Error(err.message);
     });
 };
 
@@ -85,6 +84,6 @@ export const checkSession = async () => {
       );
     })
     .catch((err) => {
-      console.log(err);
+      throw new Error(err.message);
     });
 };

@@ -2,7 +2,7 @@
  * @Author: mkamadeus
  * @Date: 2020-11-13 14:02:14
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-25 16:34:01
+ * @Last Modified time: 2020-11-25 17:11:42
  */
 
 import React, { useContext, useEffect } from "react";
@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
 import useLogin from "@/hooks/useLogin";
+import Swal from "sweetalert2";
 
 type LoginForm = {
   username: string;
@@ -20,17 +21,18 @@ const LoginPage = () => {
   useLogin();
 
   const { register, handleSubmit } = useForm<LoginForm>();
-  const [mutate] = useMutation(login);
+  const [mutate] = useMutation(login, {
+    throwOnError: true,
+  });
   const history = useHistory();
 
   const onSubmit = async (credentials: LoginForm) => {
-    await mutate(credentials)
-      .then((status) => {
-        history.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      await mutate(credentials);
+      history.push("/");
+    } catch (err) {
+      Swal.fire({ icon: "error", title: "Login failed", text: err.message });
+    }
   };
   return (
     <div className="bg-gradient-to-r from-teal-400 to-blue-500">
@@ -70,11 +72,6 @@ const LoginPage = () => {
                 </button>
               </div>
             </form>
-            {/* {errors && (
-              <div className="bg-red-300 border border-red-400 rounded text-red-700 p-1">
-                Invalid Credentials
-              </div>
-            )} */}
           </div>
         </div>
       </div>
