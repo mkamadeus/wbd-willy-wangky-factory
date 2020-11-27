@@ -2,12 +2,10 @@
  * @Author: mkamadeus
  * @Date: 2020-11-16 01:03:12
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-25 15:00:00
+ * @Last Modified time: 2020-11-27 16:51:58
  */
 
-import axios from "axios";
 import { parseStringPromise } from "xml2js";
-import { generateDummyPromise } from "./dummy";
 import { factoryApi } from "./instance";
 
 export const getBalance = async (): Promise<number> => {

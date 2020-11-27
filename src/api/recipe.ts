@@ -1,8 +1,6 @@
-import { generateDummyPromise } from "./dummy";
 import { Recipe } from "@/types/recipe";
-import axios from "axios";
 import { parseStringPromise } from "xml2js";
-import { Ingredient, IngredientRecipe } from "@/types/ingredient";
+import { IngredientRecipe } from "@/types/ingredient";
 import { factoryApi } from "./instance";
 
 export const getRecipes = async (): Promise<Recipe[]> => {

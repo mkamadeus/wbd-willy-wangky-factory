@@ -20,7 +20,7 @@ const DropdownField = React.forwardRef<HTMLInputElement, Props>(
         <input
           type="hidden"
           name={props.name}
-          value={index ? props.options[index] : ""}
+          value={index !== undefined ? props.options[index] : ""}
           ref={ref}
         />
         <div className="rounded border border-gray-300 w-full p-1 focus:outline-none relative">

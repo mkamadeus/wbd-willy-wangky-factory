@@ -1,11 +1,17 @@
+import React, { useState } from "react";
 import { getBalance } from "@/api/balance";
 import { getSupplierIngredients } from "@/api/ingredient";
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import DropdownField from "../shared/DropdownField";
 import InputField from "../shared/InputField";
 import LazyText from "../shared/LazyText";
+import { createTransaction } from "@/api/transaction";
+
+type FormData = {
+  quantity: number[];
+  uuid: string[];
+};
 
 const PurchaseCard = () => {
   const { data: balance, isLoading: isBalanceLoading } = useQuery(
@@ -16,7 +22,9 @@ const PurchaseCard = () => {
     "ingredientsSupplier",
     getSupplierIngredients
   );
-  const { register, handleSubmit } = useForm();
+  const [mutate] = useMutation(createTransaction);
+
+  const { register, handleSubmit, watch } = useForm();
 
   const [count, setCount] = useState<number>(1);
   const incrementCount = () => {
@@ -28,8 +36,29 @@ const PurchaseCard = () => {
     }
   };
 
-  const onSubmit = (data: {}) => {
-    console.log(data);
+  const onSubmit = async (ingredients: FormData) => {
+    const ingredientList = [];
+    for (let i = 0; i < ingredients.quantity.length; i++) {
+      ingredientList.push({
+        quantity: ingredients.quantity[i],
+        uuid: ingredients.uuid[i],
+      });
+    }
+    console.log(
+      JSON.stringify({
+        balance: balance as number,
+        ingredients: ingredientList,
+      })
+    );
+    await mutate({
+      data: { balance: balance as number, ingredients: ingredientList },
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -50,6 +79,16 @@ const PurchaseCard = () => {
       <div>
         {!isIngredientsLoading && ingredients ? (
           <>
+            <div>
+              {ingredients.map((ing) => {
+                return (
+                  <div>
+                    <div>{ing.name}</div>
+                    <div>{ing.price}</div>
+                  </div>
+                );
+              })}
+            </div>
             <div className="flex p-2 -m-1">
               <div className="p-1">
                 <button
@@ -76,8 +115,9 @@ const PurchaseCard = () => {
               {Array(count)
                 .fill(1)
                 .map((_, i) => {
+                  // console.log(ingredients);
                   return (
-                    <div className="flex p-2 -m-1">
+                    <div className="flex p-2 -m-1" key={`form-item-${i}`}>
                       <div className="w-full p-1">
                         <DropdownField
                           label="Ingredient"
@@ -92,7 +132,7 @@ const PurchaseCard = () => {
                         <InputField
                           label="Count"
                           type="number"
-                          name={`qty[${i}]`}
+                          name={`quantity[${i}]`}
                           ref={register}
                         />
                       </div>

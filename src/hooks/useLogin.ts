@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { checkSession } from "@/api/auth";
 import { useHistory, useLocation } from "react-router-dom";
 

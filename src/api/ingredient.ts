@@ -2,13 +2,11 @@
  * @Author: mkamadeus
  * @Date: 2020-11-16 13:39:09
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-25 20:11:31
+ * @Last Modified time: 2020-11-27 16:50:09
  */
 
 import { Ingredient } from "@/types/ingredient";
-import axios from "axios";
 import { parseStringPromise } from "xml2js";
-import { generateDummyPromise } from "./dummy";
 import { factoryApi, supplierApi } from "./instance";
 
 export const getFactoryIngredients = async () => {

@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import LazyText from "../shared/LazyText";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   ingredientId?: number;
