@@ -26,7 +26,7 @@ const PurchaseCard = () => {
   );
   const [mutate] = useMutation(createTransaction);
 
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const [count, setCount] = useState<number>(1);
   const incrementCount = () => {

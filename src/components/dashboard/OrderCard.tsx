@@ -5,7 +5,7 @@ import OrderItem from "./OrderItem";
 
 interface Props {}
 
-const OrderCard: React.FC<Props> = (props) => {
+const OrderCard: React.FC<Props> = () => {
   const { data: chocolateRequests, isLoading } = useQuery(
     "chocolateRequests",
     getChocolateRequests
@@ -29,13 +29,13 @@ const OrderCard: React.FC<Props> = (props) => {
         </thead>
         <tbody className="overflow-y-auto">
           {!isLoading && chocolateRequests
-            ? chocolateRequests.map((req) => {
-                return <OrderItem {...req} />;
+            ? chocolateRequests.map((req, i) => {
+                return <OrderItem {...req} key={`order-item-${i}`} />;
               })
             : Array(5)
                 .fill(1)
-                .map(() => {
-                  return <OrderItem.Lazy />;
+                .map((_, i) => {
+                  return <OrderItem.Lazy key={`order-item-lazy-${i}`} />;
                 })}
         </tbody>
       </table>

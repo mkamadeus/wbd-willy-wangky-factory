@@ -1,6 +1,6 @@
+import React from "react";
 import { logout } from "@/api/auth";
-import React, { useContext } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
 
 const Navbar = () => {

@@ -54,6 +54,7 @@ const IndexPage = () => {
         {cardNavigation.map((nav, i) => {
           return (
             <div
+              key={`navigation-link-${i}`}
               className={`${
                 i === cardIndex
                   ? "rounded-full bg-blue-500 text-white font-bold"

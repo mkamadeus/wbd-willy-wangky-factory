@@ -9,12 +9,11 @@ const useLogin = () => {
   const checkLoginStatus = useCallback(async () => {
     const status = (await checkSession()) as boolean;
     if (status) {
-      console.log(location.pathname);
       history.push(location.pathname !== "/login" ? location.pathname : "/");
     } else {
       history.push("/login");
     }
-  }, [history]);
+  }, [history, location.pathname]);
 
   useEffect(() => {
     checkLoginStatus();

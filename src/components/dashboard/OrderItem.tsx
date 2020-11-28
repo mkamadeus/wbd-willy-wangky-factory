@@ -20,9 +20,9 @@ const Lazy: React.FC = () => {
     <tr>
       {Array(6)
         .fill(1)
-        .map(() => {
+        .map((_, i) => {
           return (
-            <td className="text-center text-sm">
+            <td className="text-center text-sm" key={`order-lazy-text-${i}`}>
               <LazyText />
             </td>
           );

@@ -1,4 +1,3 @@
-import { Ingredient } from "@/types/ingredient";
 import { supplierApi } from "./instance";
 import { factoryApi } from "./instance";
 import { parseStringPromise } from "xml2js";
