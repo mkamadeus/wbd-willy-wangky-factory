@@ -7,6 +7,7 @@ import DropdownField from "../shared/DropdownField";
 import InputField from "../shared/InputField";
 import LazyText from "../shared/LazyText";
 import { createTransaction } from "@/api/transaction";
+import Swal from "sweetalert2";
 
 type FormData = {
   quantity: number[];
@@ -14,10 +15,11 @@ type FormData = {
 };
 
 const PurchaseCard = () => {
-  const { data: balance, isLoading: isBalanceLoading } = useQuery(
-    "balance",
-    getBalance
-  );
+  const {
+    data: balance,
+    isLoading: isBalanceLoading,
+    refetch: refetchBalance,
+  } = useQuery("balance", getBalance);
   const { data: ingredients, isLoading: isIngredientsLoading } = useQuery(
     "ingredientsSupplier",
     getSupplierIngredients
@@ -44,19 +46,24 @@ const PurchaseCard = () => {
         uuid: ingredients.uuid[i],
       });
     }
-    console.log(
-      JSON.stringify({
-        balance: balance as number,
-        ingredients: ingredientList,
-      })
-    );
     await mutate({
       data: { balance: balance as number, ingredients: ingredientList },
     })
       .then((response) => {
+        refetchBalance();
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Transaction success, balance has been cut.",
+        });
         console.log(response);
       })
       .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Transaction failed.",
+          text: "We did an oopsie!",
+        });
         console.log(err);
       });
   };
@@ -82,17 +89,17 @@ const PurchaseCard = () => {
             <div>
               {ingredients.map((ing) => {
                 return (
-                  <div>
-                    <div>{ing.name}</div>
-                    <div>{ing.price}</div>
+                  <div className="flex -m-1 text-xs">
+                    <div className="p-1">{ing.name}</div>
+                    <div className="p-1">Rp {ing.price?.toLocaleString()}</div>
                   </div>
                 );
               })}
             </div>
-            <div className="flex p-2 -m-1">
+            <div className="flex justify-end p-2 -m-1">
               <div className="p-1">
                 <button
-                  className="bg-green-500 text-white rounded-full w-6 h-6"
+                  className="bg-green-500 text-white rounded-full w-6 h-6 focus:outline-none"
                   onClick={() => {
                     decrementCount();
                   }}
@@ -102,7 +109,7 @@ const PurchaseCard = () => {
               </div>
               <div className="p-1">
                 <button
-                  className="bg-green-500 text-white rounded-full w-6 h-6"
+                  className="bg-green-500 text-white rounded-full w-6 h-6 focus:outline-none"
                   onClick={() => {
                     incrementCount();
                   }}

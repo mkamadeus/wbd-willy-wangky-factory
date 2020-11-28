@@ -75,7 +75,7 @@ export const createTransaction = async ({
           const stock = ingredient.quantity;
           const expiryDate = new Date(ingredient.expiryDate);
           const totalPrice = ingredient.totalPrice;
-          addIngredientStock({
+          return addIngredientStock({
             data: { uuid, name, stock, expiryDate, totalPrice },
           });
         })
