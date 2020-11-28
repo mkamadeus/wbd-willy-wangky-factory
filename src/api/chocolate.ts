@@ -41,3 +41,38 @@ export const getChocolates = async (): Promise<Chocolate[]> => {
       return chocolatesArray;
     });
 };
+
+export const createChocolate = async ({
+  uuid,
+  quantity,
+}: {
+  uuid: string;
+  quantity: number;
+}) => {
+  return await factoryApi
+    .post<string>(
+      "/makeChocolate",
+      `<?xml version="1.0" ?>
+    <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+        <S:Body>
+            <ns2:makeChocolate xmlns:ns2="http://services/">
+                <arg0>${uuid}</arg0>
+                <arg1>${quantity}</arg1>
+            </ns2:makeChocolate>
+        </S:Body>
+    </S:Envelope>
+`
+    )
+    .then((response) => {
+      return parseStringPromise(response.data);
+    })
+    .then((result) => {
+      return (
+        result["S:Envelope"]["S:Body"][0]["ns2:makeChocolateResponse"][0]
+          .return[0] === "true"
+      );
+    })
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
