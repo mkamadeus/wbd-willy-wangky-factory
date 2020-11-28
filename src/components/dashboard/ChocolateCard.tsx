@@ -15,7 +15,10 @@ type FormData = {
 };
 
 const ChocolateCard: React.FC<Props> = (props) => {
-  const { data: chocolates, isLoading } = useQuery("chocolates", getChocolates);
+  const { data: chocolates, isLoading, refetch: refetchChocolates } = useQuery(
+    "chocolates",
+    getChocolates
+  );
 
   const { register, handleSubmit, watch } = useForm();
 
@@ -23,6 +26,7 @@ const ChocolateCard: React.FC<Props> = (props) => {
     await createChocolate(chocolate)
       .then((response) => {
         if (response) {
+          refetchChocolates();
           Swal.fire({
             icon: "success",
             title: "Success!",
