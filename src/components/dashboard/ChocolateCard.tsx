@@ -19,6 +19,7 @@ const ChocolateCard: React.FC<Props> = (props) => {
             <th>ID</th>
             <th>Name</th>
             <th>Stock</th>
+            <th></th>
           </tr>
         </thead>
         <tbody className="overflow-y-auto">
@@ -29,7 +30,7 @@ const ChocolateCard: React.FC<Props> = (props) => {
                     chocoId={choco.id}
                     name={choco.name}
                     stock={choco.stock}
-                    uuid={choco.name}
+                    uuid={choco.uuid}
                   />
                 );
               })
