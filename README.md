@@ -1,46 +1,74 @@
-# Getting Started with Create React App
+# Willy Wangky's Factory
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+Interface for Willy Wangky's Factory. We hope Wangky is pleased by this.
 
-In the project directory, you can run:
+## Notable Libraries
 
-### `yarn start`
+Initiated using CRA several libraries are used to enhance developer experience.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Typescript (.tsx)
+- React Rewired (for path aliases without ejecting)
+- Font Awesome
+- Axios
+- React Query
+- TailwindCSS
+- Sweet Alert 2
+- React Router
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Several tools are used to make sure of code consistency:
 
-### `yarn test`
+- Husky
+- Prettier
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `yarn build`
+Features include:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Login and logout (basic auth)
+- Show orders and process them
+- Purchase ingredients from supplier, showing prices
+- Show ingredients in stock
+- Showing recipes for chocolate
+- Showing chocolates and creating them
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Running Application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To run the application in development mode, type in:
 
-### `yarn eject`
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Don't forget to set the environment variables on the `.env` file as presented in the `.env.example` file.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To build the project as static files, type in:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm run build
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Pembagian Tugas
 
-## Learn More
+### General
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Login and logout (basic auth)
+   - 13518035
+2. Show orders and process them
+   - 13518035
+   - 13518018
+3. Purchase ingredients from supplier, showing prices
+   - 13518035
+4. Show ingredients in stock
+   - 13518035
+5. Showing recipes for chocolate
+   - 13518035
+6. Showing chocolates and creating them
+   - 13518035
+   - 13518044
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Misc
+
+1. Deployment
+   - 13518035

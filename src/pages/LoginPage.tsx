@@ -2,16 +2,17 @@
  * @Author: mkamadeus
  * @Date: 2020-11-13 14:02:14
  * @Last Modified by: mkamadeus
- * @Last Modified time: 2020-11-25 17:11:42
+ * @Last Modified time: 2020-11-28 22:13:07
  */
 
-import React from "react";
+import React, { useContext } from "react";
 import { login } from "@/api/auth";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
 import useLogin from "@/hooks/useLogin";
 import Swal from "sweetalert2";
+import { UserContext } from "@/context/UserContext";
 
 type LoginForm = {
   username: string;
@@ -20,6 +21,7 @@ type LoginForm = {
 const LoginPage = () => {
   useLogin();
 
+  const userContext = useContext(UserContext);
   const { register, handleSubmit } = useForm<LoginForm>();
   const [mutate] = useMutation(login, {
     throwOnError: true,
@@ -29,6 +31,7 @@ const LoginPage = () => {
   const onSubmit = async (credentials: LoginForm) => {
     try {
       await mutate(credentials);
+      userContext.setUsername(credentials.username);
       history.push("/");
     } catch (err) {
       Swal.fire({ icon: "error", title: "Login failed", text: err.message });

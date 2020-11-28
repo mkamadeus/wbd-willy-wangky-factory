@@ -46,9 +46,11 @@ const RecipeItem: React.FC<Props> & { Lazy: React.FC } = (props) => {
           {props.ingredients &&
             props.ingredients.map((ing) => {
               return (
-                <div className="flex">
-                  <div className="italic text-xs text-gray-700">{ing.name}</div>
-                  <div className="italic text-xs text-gray-700">
+                <div className="flex -m-1">
+                  <div className="italic text-xs text-gray-700 p-1">
+                    {ing.name}
+                  </div>
+                  <div className="italic text-xs text-gray-700 p-1">
                     {ing.amount}
                   </div>
                 </div>

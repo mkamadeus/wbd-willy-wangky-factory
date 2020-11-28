@@ -14,13 +14,13 @@ type FormData = {
   quantity: number;
 };
 
-const ChocolateCard: React.FC<Props> = (props) => {
+const ChocolateCard: React.FC<Props> = () => {
   const { data: chocolates, isLoading, refetch: refetchChocolates } = useQuery(
     "chocolates",
     getChocolates
   );
 
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = async (chocolate: FormData) => {
     await createChocolate(chocolate)

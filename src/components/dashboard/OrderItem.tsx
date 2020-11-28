@@ -1,8 +1,12 @@
 import { approveChocolateRequest } from "@/api/chocolateRequest";
 import { Chocolate } from "@/types/chocolate";
-import { ChocolateRequestStatus } from "@/types/chocolateRequest";
+import {
+  ChocolateRequest,
+  ChocolateRequestStatus,
+} from "@/types/chocolateRequest";
 import React from "react";
 import { useMutation } from "react-query";
+import { RefetchOptions } from "react-query/types/core/query";
 import Swal from "sweetalert2";
 import LazyText from "../shared/LazyText";
 
@@ -13,6 +17,9 @@ interface Props {
   createdAt: Date;
   chocolate: Partial<Chocolate>;
   amount: number;
+  refetch: (
+    options?: RefetchOptions | undefined
+  ) => Promise<ChocolateRequest[] | undefined>;
 }
 
 const Lazy: React.FC = () => {
@@ -42,12 +49,14 @@ const OrderItem: React.FC<Props> & { Lazy: React.FC } = (props: Props) => {
           title: "Success!",
           text: "Item delivered!",
         });
+        props.refetch();
       })
       .catch((err) => {
         Swal.fire({
           icon: "error",
           title: "Approval error",
-          text: err.message,
+          text:
+            "You probably don't have enough chocolates, or we did an oopsie.",
         });
       });
   };

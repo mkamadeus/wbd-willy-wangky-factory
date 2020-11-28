@@ -6,7 +6,7 @@ import OrderItem from "./OrderItem";
 interface Props {}
 
 const OrderCard: React.FC<Props> = () => {
-  const { data: chocolateRequests, isLoading } = useQuery(
+  const { data: chocolateRequests, isLoading, refetch } = useQuery(
     "chocolateRequests",
     getChocolateRequests
   );
@@ -30,7 +30,13 @@ const OrderCard: React.FC<Props> = () => {
         <tbody className="overflow-y-auto">
           {!isLoading && chocolateRequests
             ? chocolateRequests.map((req, i) => {
-                return <OrderItem {...req} key={`order-item-${i}`} />;
+                return (
+                  <OrderItem
+                    {...req}
+                    key={`order-item-${i}`}
+                    refetch={refetch}
+                  />
+                );
               })
             : Array(5)
                 .fill(1)

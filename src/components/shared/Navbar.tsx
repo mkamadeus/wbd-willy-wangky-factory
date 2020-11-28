@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { logout } from "@/api/auth";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "@/context/UserContext";
 
 const Navbar = () => {
   const history = useHistory();
 
+  const userContext = useContext(UserContext);
   const [mutate] = useMutation(logout);
 
   const doLogout = () => {
     try {
       mutate();
+      userContext.setUsername("");
       history.push("/login");
     } catch (err) {
       console.log(err);
@@ -21,7 +24,7 @@ const Navbar = () => {
     <div className="flex justify-between items-center p-6">
       <div>
         <div className="text-4xl font-bold relative">
-          Welcome, mkamadeus!
+          Welcome, {userContext.username}!
           <div
             className="absolute bottom-0 bg-gradient-to-r from-teal-400 to-blue-500"
             style={{ width: 200, height: 6, left: 50 }}
